@@ -1,3 +1,4 @@
 # TIL
 
-Updating soon
+Simple website for TIL
+
