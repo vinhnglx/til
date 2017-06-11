@@ -1,15 +1,24 @@
 require 'hanami-controller'
+require 'slim'
+require 'httparty'
 
 module Home
   class Index
     include ::Hanami::Action
 
     def call(params)
-      render_layout "<h1>Hello</h1>"
+      self.body = [template.render(self)]
     end
 
-    def render_layout(content = "")
-      self.body = LayoutCell.new(nil).(){ content }
+    private
+
+    def template
+      Slim::Template.new(::File.join(App.root, 'app', 'views', "home", "index.slim"))
+    end
+
+    def posts
+      response = ::HTTParty.get('https://api.github.com/repos/vinhnglx/vinhnglx.github.io/issues')
+      JSON.parse(response.body).map { |post| { title: post["title"], link: post["html_url"] } }
     end
   end
 end
