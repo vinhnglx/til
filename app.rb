@@ -4,7 +4,7 @@ class App
   def self.router
     Hanami::Router.new do
       get '/', to: Home::Index
-      get '/about', to: ->(env) { [200, {}, ['About']]  }
+      get '/blog', to: ->(env) { [302, {'Content-Type' => 'text/html', 'Location' => 'https://vinhnglx.github.io'}, ["Let's go"]]  }
     end
   end
 
