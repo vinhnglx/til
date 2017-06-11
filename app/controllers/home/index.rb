@@ -5,7 +5,11 @@ module Home
     include ::Hanami::Action
 
     def call(params)
-      self.body = "Hello"
+      render_layout "<h1>Hello</h1>"
+    end
+
+    def render_layout(content = "")
+      self.body = LayoutCell.new(nil).(){ content }
     end
   end
 end
