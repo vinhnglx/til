@@ -1,2 +1,2 @@
 require_relative 'home'
-run Home.new
+run Home.router
